@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+DIMG=$(basename "$(pwd)")
+docker logs "${DIMG}" |& gzip - > "/home/ubuntu/logs/${DIMG}/$(date +"%Y_%d_%m").log.gz"
+docker kill "${DIMG}"
+docker rm "${DIMG}"
+
+docker run -d --restart=always --name "${DIMG}" -v "$(pwd)":/app -p 5000:5000 "${DIMG}"

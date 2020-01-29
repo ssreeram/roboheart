@@ -1,0 +1,5 @@
+#!/bin/bash
+
+DIMG="${1:-$(basename "$(pwd)")}"
+# essentially building a command here
+exec docker run --rm -it -v "$(pwd)":/app -p 5000:5000 "${DIMG}"
